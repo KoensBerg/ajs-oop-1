@@ -7,7 +7,9 @@ import Daemon from '../class-Daemon';
 import Undead from '../class-Undead';
 import Zombie from '../class-Zombie';
 
-// Если тип имени персонажа != строка, должны получить ошибку
+// - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Если тип имени персонажа != строка, выбросит ошибку
+// - - - - - - - - - - - - - - - - - - - - - - - - - - -
 test.each([
   [Bowman],
   [Swordsman],
@@ -24,7 +26,9 @@ test.each([
   },
 );
 
-// Если длина имени персонажа > 10 символов, должны получить ошибку
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Если длина имени персонажа > 10 символов, выбросит ошибку
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 test.each([
   [Bowman],
   [Swordsman],
@@ -41,7 +45,9 @@ test.each([
   },
 );
 
-// Если длина имени персонажа < 2 символов, должны получить ошибку
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Если длина имени персонажа < 2 символов, выбросит ошибку
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 test.each([
   [Bowman],
   [Swordsman],
@@ -58,22 +64,26 @@ test.each([
   },
 );
 
-// Если тип нового персонажа отличен от разрешённых, должны получить ошибку
-test('throws on wrong type of Character', () => {
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Если тип дочернего класса отличен от разрешённых, выбросит ошибку
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+test('throws on wrong child class type', () => {
   class NewClass extends Character {
     constructor(name) {
-      super(name, 'WrongType', 25, 25);
+      super(name, 'NewClass', 25, 25);
     }
   }
 
-  const newPerson = () => new NewClass('someName');
+  const persOlgerd = () => new NewClass('Olgerd');
   const expected = 'Использован несуществующий тип персонажа';
 
-  expect(newPerson).toThrow(expected);
+  expect(persOlgerd).toThrow(expected);
 });
 
-// Если тип нового персонажа разрешён, будет создан новый персонаж указанного типа
-test('shold be true type of Character', () => {
-  const newPerson = new Bowman('someName');
-  expect(newPerson.type).toBe('Bowman');
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// Если тип дочернего класса разрешён, будет создан новый персонаж
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+test('shold create new personage of true type', () => {
+  const persOlgerd = new Bowman('Olgerd');
+  expect(persOlgerd.type).toBe('Bowman');
 });
